@@ -7,14 +7,14 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Person {
+public class Habit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public Person() {
+    public Habit() {
     }
 
     public Long getId() {
@@ -37,8 +37,8 @@ public class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id) && Objects.equals(name, person.name);
+        Habit habit = (Habit) o;
+        return Objects.equals(id, habit.id) && Objects.equals(name, habit.name);
     }
 
     @Override
