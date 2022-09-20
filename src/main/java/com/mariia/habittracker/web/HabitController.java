@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/habit")
+@CrossOrigin
 public class HabitController {
 
     @Autowired

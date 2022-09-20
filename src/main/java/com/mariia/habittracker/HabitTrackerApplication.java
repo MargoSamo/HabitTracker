@@ -7,14 +7,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
-@SpringBootApplication(exclude = {
-    DataSourceAutoConfiguration.class,
-    HibernateJpaAutoConfiguration.class
-})
-@ComponentScan(excludeFilters={
-    @ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value=DataSourceAutoConfiguration.class),
-    @ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value=HibernateJpaAutoConfiguration.class)
-})
+@SpringBootApplication()
 public class HabitTrackerApplication {
 
     public static void main(String[] args) {
