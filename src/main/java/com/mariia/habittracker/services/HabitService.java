@@ -1,6 +1,7 @@
 package com.mariia.habittracker.services;
 
 import com.mariia.habittracker.domain.Habit;
+import com.mariia.habittracker.exceptions.HabitNameException;
 import com.mariia.habittracker.repositories.HabitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,20 @@ public class HabitService {
     private HabitRepository habitRepository;
 
     public Habit saveOrUpdateHabit(Habit habit) {
-        habit.setName(habit.getName());
-        return habitRepository.save(habit);
+        try {
+            habit.setName(habit.getName());
+            return habitRepository.save(habit);
+        } catch (Exception e) {
+            throw new HabitNameException("Project name '" + habit.getName().toUpperCase() + "' already exists");
+        }
     }
 
     public Habit findByName(String nameId) {
         Habit habit = habitRepository.findByName(nameId);
+
+        if (habit==null) {
+            throw new HabitNameException("Project name '" + nameId + "' does not exists");
+        }
         return habit;
     }
 
@@ -29,7 +38,7 @@ public class HabitService {
         Habit habit = habitRepository.findByName(nameId);
 
         if(habit == null) {
-            throw new RuntimeException();
+            throw new HabitNameException("Cannot Project with name '" + nameId + "' . This project does not exist");
         }
         habitRepository.delete(habit);
     }

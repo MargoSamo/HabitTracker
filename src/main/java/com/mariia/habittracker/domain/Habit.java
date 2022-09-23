@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -22,7 +23,9 @@ public class Habit {
     private String name;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate day;
+
     private boolean done;
+    @NotNull(message = "Project value is required")
     private Integer value;
 
     private Habit(String name, LocalDate day, boolean done, Integer value) {
